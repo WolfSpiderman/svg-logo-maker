@@ -24,3 +24,9 @@ const questions = [
         type: "input"
     }
 ]
+
+
+
+inquirer.prompt(questions).then(
+    
+)

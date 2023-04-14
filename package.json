@@ -18,6 +18,9 @@
   },
   "homepage": "https://github.com/WolfSpiderman/svg-logo-maker#readme",
   "dependencies": {
-    "inquirer": "^8.2.4"
+    "color-rgba": "^2.4.0",
+    "color-string": "^1.9.1",
+    "inquirer": "^8.2.4",
+    "named-colors": "^1.0.0"
   }
 }

@@ -1,5 +1,6 @@
 const inquirer = require("inquirer");
 const colorString = require('color-string');
+const { Shape, Circle, Square, Triangle } = require('./lib/shapes');
 
 // Questions to ask user
 const questions = [
@@ -15,7 +16,7 @@ const questions = [
             }
         },
         filter: function(input) {
-            // Convert input to lowercase
+            // Convert input to uppercase
             return input.toUpperCase();
           }
     },
@@ -25,7 +26,7 @@ const questions = [
         type: "input",
         validate: function(input) {
           if (/^#?([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$/.test(input)) {
-            return true;
+            return `#${input}`;
           } else if (/^[a-zA-Z]+$/.test(input)) {
             const colorObject = colorString.get(input);
             if (colorObject !== null) {
@@ -51,14 +52,16 @@ const questions = [
         message: "What color would you like the symbol's background, the shape, to be? Enter the name of a common color, or a hex-code.",
         type: "input",
         validate: function(input) {
-          if (/^[a-zA-Z]+$/.test(input) || /^#?([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$/.test(input)) {
-            const colorObject = colorString.get(input);
-            if (colorObject !== null) {
-                return true;
-            } else {
+            if (/^#?([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$/.test(input)) {
+                return `#${input}`;
+              } else if (/^[a-zA-Z]+$/.test(input)) {
+                const colorObject = colorString.get(input);
+                if (colorObject !== null) {
+                    return true;
+                }
+              } else {
                 return "Please enter a valid color name or hex-code.";
-            }
-          }
+              }
         },
         filter: function(input) {
           // Convert input to lowercase
@@ -74,4 +77,21 @@ const questions = [
 
 
 
-inquirer.prompt(questions).then(data => console.log(data))
+inquirer.prompt(questions).then(data => {
+    const text = data.text;
+    const color = data.color;
+    const bgColor = data.bgColor;
+    const border = data.border;
+    const shape = data.shape;
+
+    if (shape === "circle") {
+        const circle = new Circle(text, color, bgColor, border);
+        circle.renderSVG("./images/logo.svg");
+    } else if (shape === "square") {
+        const square = new Square(text, color, bgColor, border);
+        square.renderSVG("./images/logo.svg");
+    } else if (shape === "triangle") {
+        const triangle = new Triangle(text, color, bgColor, border);
+        triangle.renderSVG("./images/logo.svg");
+    }
+})

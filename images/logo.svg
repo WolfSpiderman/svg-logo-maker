@@ -2,9 +2,8 @@
         width="300" height="200"
         xmlns="http://www.w3.org/2000/svg">
     
-       <rect x="50" width="200" height="200" stroke-width="3" stroke="orange" 
-       fill="green" />
+       <path d="M 150 30 L 270 170 L 30 170 Z" stroke-width="3" stroke="gold" fill="purple" />
     
-       <text x="150" y="120" font-size="60" text-anchor="middle" fill="orange">Q3P</text>
+       <text x="150" y="150" font-size="60" text-anchor="middle" fill="gold">JDJ</text>
     
      </svg>
